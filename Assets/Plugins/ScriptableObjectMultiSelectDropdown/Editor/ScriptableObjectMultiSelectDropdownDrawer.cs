@@ -19,7 +19,7 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
         private static List<ScriptableObject> _scriptableObjects = new List<ScriptableObject>();
         private static List<ScriptableObject> _selectedScriptableObjects = new List<ScriptableObject>();
         private static readonly int _controlHint = typeof(ScriptableObjectMultiSelectDropdownAttribute).GetHashCode();
-        private static GUIContent _tempContent = new GUIContent();
+        private static GUIContent _popupContent = new GUIContent();
         private static int _selectionControlID;
         private static readonly GenericMenu.MenuFunction2 _onSelectedScriptableObject = OnSelectedScriptableObject;
         private static bool isChanged;
@@ -46,6 +46,9 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
             return EditorStyles.popup.CalcHeight(GUIContent.none, 0);
         }
 
+        /// <summary>
+        /// How you can get type of field which it uses PropertyAttribute
+        /// </summary>
         private static Type GetPropertyType(SerializedProperty property)
         {
             Type parentType = property.serializedObject.targetObject.GetType();
@@ -71,11 +74,17 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
             return true;
         }
 
+        /// <summary>
+        /// When new ScriptableObject added to the project
+        /// </summary>
         private static void ClearCache()
         {
             _scriptableObjects.Clear();
         }
 
+        /// <summary>
+        /// Gets ScriptableObjects just when it is a first time or new ScriptableObject added to the project
+        /// </summary>
         private static void GetScriptableObjects(ScriptableObjectMultiSelectDropdownAttribute attribute)
         {
             UnityEngine.Object[] loadedObject = Resources.LoadAll("", attribute.BaseType);
@@ -85,6 +94,9 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
             }
         }
 
+        /// <summary>
+        /// Checks if the ScriptableObject is selected or not by checking if the list contains it.
+        /// </summary>
         private static bool ResolveSelectedScriptableObject(ScriptableObject scriptableObject)
         {
             if (_selectedScriptableObjects == null)
@@ -117,6 +129,9 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
             }
         }
 
+        /// <summary>
+        /// Iterats through the property for finding selected ScriptableObjects
+        /// </summary>
         private static ScriptableObject[] Read(SerializedProperty property)
         {
             List<ScriptableObject> selectedScriptableObjects = new List<ScriptableObject>();
@@ -133,10 +148,14 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
             return selectedScriptableObjects.ToArray();
         }
 
+        /// <summary>
+        /// Iterats through the property for storing selected ScriptableObjects
+        /// </summary>
         private static void Write(SerializedProperty property, ScriptableObject[] scriptableObjects)
         {
-            //var w = new System.Diagnostics.Stopwatch();
-            //w.Start();
+            // Faster way
+            // var w = new System.Diagnostics.Stopwatch();
+            // w.Start();
             int i = 0;
             SerializedProperty iterator = property.Copy();
             iterator.arraySize = scriptableObjects.Length;
@@ -149,9 +168,9 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
                     i++;
                 }
             }
-            //w.Stop();
-            //long milliseconds = w.ElapsedMilliseconds;
-            //Debug.Log(w.Elapsed.TotalMilliseconds + " ms");
+            // w.Stop();
+            // long milliseconds = w.ElapsedMilliseconds;
+            // Debug.Log(w.Elapsed.TotalMilliseconds + " ms");
 
             // Another way
             // property.arraySize = scriptableObjects.Length;
@@ -220,22 +239,22 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
                 case EventType.Repaint:
                     if (scriptableObjects.Length == 0)
                     {
-                        _tempContent.text = "Nothing";
+                        _popupContent.text = "Nothing";
                     }
                     else if (scriptableObjects.Length == _scriptableObjects.Count)
                     {
-                        _tempContent.text = "Everything";
+                        _popupContent.text = "Everything";
                     }
                     else if (scriptableObjects.Length >= 2)
                     {
-                        _tempContent.text = "Mixed ...";
+                        _popupContent.text = "Mixed ...";
                     }
                     else
                     {
-                        _tempContent.text = scriptableObjects[0].name;
+                        _popupContent.text = scriptableObjects[0].name;
                     }
 
-                    EditorStyles.popup.Draw(position, _tempContent, controlID);
+                    EditorStyles.popup.Draw(position, _popupContent, controlID);
                     break;
             }
 
@@ -263,7 +282,7 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
             {
                 var scriptableObject = _scriptableObjects[i];
 
-                string menuLabel = FormatGroupedScriptableObject(scriptableObject, grouping);
+                string menuLabel = MakeDropDownGroup(scriptableObject, grouping);
                 if (string.IsNullOrEmpty(menuLabel))
                     continue;
 
@@ -272,39 +291,6 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
             }
 
             menu.DropDown(position);
-        }
-
-        private static string FindPath(ScriptableObject scriptableObject)
-        {
-            string path = AssetDatabase.GetAssetPath(scriptableObject);
-            path = path.Substring(path.IndexOf("Resources"));
-            path = path.Replace("Resources/", "");
-            path = path.Replace(".asset", "");
-
-            return path;
-        }
-
-        private static string FormatGroupedScriptableObject(ScriptableObject scriptableObject, ScriptableObjectGrouping grouping)
-        {
-            string path = FindPath(scriptableObject);
-
-            switch (grouping)
-            {
-                default:
-                case ScriptableObjectGrouping.None:
-                    path = path.Replace("/", " > ");
-                    return path;
-
-                case ScriptableObjectGrouping.ByFolder:
-                    return path;
-
-                case ScriptableObjectGrouping.ByFolderFlat:
-                    int last = path.LastIndexOf('/');
-                    string part1 = path.Substring(0, last);
-                    string part2 = path.Substring(last);
-                    path = part1.Replace("/", " > ") + part2;
-                    return path;
-            }
         }
 
         private static void OnSelectedScriptableObject(object userData)
@@ -332,6 +318,39 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
 
             var scriptableObjectReferenceUpdatedEvent = EditorGUIUtility.CommandEvent("ScriptableObjectReferenceUpdated");
             EditorWindow.focusedWindow.SendEvent(scriptableObjectReferenceUpdatedEvent);
+        }
+
+        private static string FindScriptableObjectFolderPath(ScriptableObject scriptableObject)
+        {
+            string path = AssetDatabase.GetAssetPath(scriptableObject);
+            path = path.Substring(path.IndexOf("Resources"));
+            path = path.Replace("Resources/", "");
+            path = path.Replace(".asset", "");
+
+            return path;
+        }
+
+        private static string MakeDropDownGroup(ScriptableObject scriptableObject, ScriptableObjectGrouping grouping)
+        {
+            string path = FindScriptableObjectFolderPath(scriptableObject);
+
+            switch (grouping)
+            {
+                default:
+                case ScriptableObjectGrouping.None:
+                    path = path.Replace("/", " > ");
+                    return path;
+
+                case ScriptableObjectGrouping.ByFolder:
+                    return path;
+
+                case ScriptableObjectGrouping.ByFolderFlat:
+                    int last = path.LastIndexOf('/');
+                    string part1 = path.Substring(0, last);
+                    string part2 = path.Substring(last);
+                    path = part1.Replace("/", " > ") + part2;
+                    return path;
+            }
         }
     }
 }
