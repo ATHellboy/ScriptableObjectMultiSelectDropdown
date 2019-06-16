@@ -2,6 +2,8 @@
 ScriptableObjectMultiSelectDropdown is an attribute for the Unity Inspector.
 It is used for showing ScriptableObjects which are created in your project, in dropdown menu and select multiple of them in Inspector.
 
+![](Images/ScriptableObjectMultiSelectDropdown.gif)
+
 # Usage Example
 1. Clone this repository or download the latest [release package available](https://github.com/ATHellboy/ScriptableObjectMultiSelectDropdown/releases) (There isn't an example folder in `.unitypackage`).
 
