@@ -87,10 +87,10 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
         /// </summary>
         private static void GetScriptableObjects(ScriptableObjectMultiSelectDropdownAttribute attribute)
         {
-            UnityEngine.Object[] loadedObject = Resources.LoadAll("", attribute.BaseType);
-            for (int i = 0; i < loadedObject.Length; i++)
+            string[] guids = AssetDatabase.FindAssets(String.Format("t:{0}", attribute.BaseType));
+            for (int i = 0; i < guids.Length; i++)
             {
-                _scriptableObjects.Add(loadedObject[i] as ScriptableObject);
+                _scriptableObjects.Add(AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(guids[i]), attribute.BaseType) as ScriptableObject);
             }
         }
 
@@ -120,7 +120,7 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
                 }
                 else
                 {
-                    EditorGUI.LabelField(position, "No this type asset in Resources folder");
+                    EditorGUI.LabelField(position, "There is no this type asset in the project");
                 }
             }
             else
@@ -323,8 +323,7 @@ namespace ScriptableObjectMultiSelectDropdown.Editor
         private static string FindScriptableObjectFolderPath(ScriptableObject scriptableObject)
         {
             string path = AssetDatabase.GetAssetPath(scriptableObject);
-            path = path.Substring(path.IndexOf("Resources"));
-            path = path.Replace("Resources/", "");
+            path = path.Replace("Assets/", "");
             path = path.Replace(".asset", "");
 
             return path;

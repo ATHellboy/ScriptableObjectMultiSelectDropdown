@@ -243,9 +243,9 @@ MonoBehaviour:
   firstTargetBlocks:
     values:
     - {fileID: 11400000, guid: 06ef197a50150d74bbd59e14971d0d64, type: 2}
+    - {fileID: 11400000, guid: b2ad02b3fe2a980418912ccc895ec331, type: 2}
     - {fileID: 11400000, guid: 85a6b7c369d930a4b9e0f4f4a91ee957, type: 2}
     - {fileID: 11400000, guid: 7813bad2eca620e4b8ba9ef02c6a51c1, type: 2}
-    - {fileID: 11400000, guid: b2ad02b3fe2a980418912ccc895ec331, type: 2}
   secondTargetBlocks:
     values:
     - {fileID: 11400000, guid: 06ef197a50150d74bbd59e14971d0d64, type: 2}
