@@ -110,7 +110,7 @@ public class BlockManager : MonoBehaviour
 }
 ```
 
-![](Images/MonoBehaviourDefaultGrouping.png)
+![](Images/MonoBehaviourInterface.png)
 
 ![](Images/MonoBehaviourByFolderGrouping.png)
 
@@ -136,9 +136,9 @@ public class BlockManagerSettings : ScriptableObject
 }
 ```
 
-![](Images/ScriptableObjectDefaultGrouping.png)
+![](Images/ScriptableObjectDerivedClass.png)
 
-![](Images/ScriptableObjectByFolderFlatGrouping.png)
+![](Images/ScriptableObjectDerivedAbstractClass.png)
 
 # License
 MIT License
