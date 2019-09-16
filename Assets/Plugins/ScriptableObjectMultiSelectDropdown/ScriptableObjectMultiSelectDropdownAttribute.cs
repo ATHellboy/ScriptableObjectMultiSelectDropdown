@@ -26,6 +26,7 @@ namespace ScriptableObjectMultiSelectDropdown
         ByFolderFlat
     }
 
+    #region Example
     /// <example>
     /// <para>Usage Examples</para>
     /// <code language="csharp"><![CDATA[
@@ -35,35 +36,93 @@ namespace ScriptableObjectMultiSelectDropdown
     /// [CreateAssetMenu(menuName = "Create Block")]
     /// public class Block : ScriptableObject
     /// {
-    ///     // Some fields
+    ///     // Some fields and functions
     /// }
     /// 
+    /// public interface IBlock
+    /// {
+    ///     // Some properties and functions signature
+    /// }
+    /// 
+    /// public abstract class AbstarctBlock : ScriptableObject
+    /// {
+    ///     // Some fields and functions
+    /// }
+    /// 
+    /// [CreateAssetMenu(menuName = "Blocks/Water")]
+    /// public class WaterBlock : AbstarctBlock
+    /// {
+    ///     // Some fields and functions
+    /// }
+    /// 
+    /// [CreateAssetMenu(menuName = "Blocks/Snow")]
+    /// public class SnowBlock : ScriptableObject, IBlock
+    /// {
+    ///     // Some fields and functions
+    /// }
+    /// 
+    /// [CreateAssetMenu(menuName = "Blocks/Sand")]
+    /// public class SandBlock : Block
+    /// {
+    ///     // Some fields and functions
+    /// }
+    /// 
+    /// [CreateAssetMenu(menuName = "Blocks/Dirt")]
+    /// public class DirtBlock : ScriptableObject, IBlock
+    /// {
+    ///     // Some fields and functions
+    /// }
+    ///
     /// public class BlockManager : MonoBehaviour
     /// {
+    ///     // Without grouping (default is None)
     ///     [ScriptableObjectMultiSelectDropdown(typeof(Block))]
-    ///     public ScriptableObjectReference firstTargetBlocks;
+    ///     public ScriptableObjectReference targetBlocks;
     ///     
-    ///     // or
-    ///     
+    ///     // By grouping
     ///     [ScriptableObjectMultiSelectDropdown(typeof(Block), grouping = ScriptableObjectGrouping.ByFolder)]
-    ///     public ScriptableObjectReference secondTargetBlocks;
+    ///     public ScriptableObjectReference targetBlocksByGrouping;
+    ///     
+    ///     // Derived class
+    ///     [ScriptableObjectMultiSelectDropdown(typeof(SandBlock))]
+    ///     public ScriptableObjectReference derivedClassTargetBlock;
+    ///     
+    ///     // Derived abstract class
+    ///     [ScriptableObjectMultiSelectDropdown(typeof(AbstarctBlock))]
+    ///     public ScriptableObjectReference derivedAbstractClassTargetBlock;
+    ///     
+    ///     // Interface
+    ///     [ScriptableObjectMultiSelectDropdown(typeof(IBlock))]
+    ///     public ScriptableObjectReference interfaceTargetBlock;
     /// }
-    /// 
-    /// // or
     /// 
     /// [CreateAssetMenu(menuName = "Create Block Manager Settings")]
     /// public class BlockManagerSetting : ScriptableObject
     /// {
+    ///     // Without grouping (default is None)
     ///     [ScriptableObjectMultiSelectDropdown(typeof(Block))]
-    ///     public ScriptableObjectReference firstTargetBlocks;
+    ///     public ScriptableObjectReference targetBlocks;
     ///     
-    ///     // or
-    ///     
+    ///     // By grouping
     ///     [ScriptableObjectMultiSelectDropdown(typeof(Block), grouping = ScriptableObjectGrouping.ByFolderFlat)]
-    ///     public ScriptableObjectReference secondTargetBlocks;
+    ///     public ScriptableObjectReference targetBlocksByGrouping;
+    ///     
+    ///     // Derived class
+    ///     [ScriptableObjectMultiSelectDropdown(typeof(SandBlock))]
+    ///     public ScriptableObjectReference derivedClassTargetBlock;
+    ///     
+    ///     // Derived abstract class
+    ///     [ScriptableObjectMultiSelectDropdown(typeof(AbstarctBlock))]
+    ///     public ScriptableObjectReference derivedAbstractClassTargetBlock;
+    ///     
+    ///     // Interface
+    ///     [ScriptableObjectMultiSelectDropdown(typeof(IBlock))]
+    ///     public ScriptableObjectReference interfaceTargetBlock;
     /// }
     /// ]]></code>
     /// </example>
+    #endregion
+
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
     public class ScriptableObjectMultiSelectDropdownAttribute : PropertyAttribute
     {

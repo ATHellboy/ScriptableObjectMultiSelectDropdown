@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51edcd5a81e4a05408d77f4332faf02a, type: 3}
+  m_Name: BlockManagerSettings
+  m_EditorClassIdentifier: 
+  targetBlocks:
+    values:
+    - {fileID: 11400000, guid: b2ad02b3fe2a980418912ccc895ec331, type: 2}
+    - {fileID: 11400000, guid: 71e7cba0d9c18cb4cbd3514fd9edf794, type: 2}
+    - {fileID: 11400000, guid: 7813bad2eca620e4b8ba9ef02c6a51c1, type: 2}
+    - {fileID: 11400000, guid: e722f56469abf8040abe00b5c7b415a2, type: 2}
+    - {fileID: 11400000, guid: eba01a4723edb6e4fb8f2e1569b40d81, type: 2}
+    - {fileID: 11400000, guid: c2077eb71dcaf63429b38a89513e4084, type: 2}
+    - {fileID: 11400000, guid: 0c04c34a666b5ef45b4de17d56b37f7f, type: 2}
+  targetBlocksByGrouping:
+    values:
+    - {fileID: 11400000, guid: b2ad02b3fe2a980418912ccc895ec331, type: 2}
+  derivedClassTargetBlock:
+    values:
+    - {fileID: 11400000, guid: 845bb09fb7a27914aab1ed8e41fa0bc4, type: 2}
+    - {fileID: 11400000, guid: 0c04c34a666b5ef45b4de17d56b37f7f, type: 2}
+  derivedAbstractClassTargetBlock:
+    values:
+    - {fileID: 11400000, guid: 206a0e01685e06645970a96112a1eb9e, type: 2}
+    - {fileID: 11400000, guid: 48d64063107d2bd4d83cf0d7975beda9, type: 2}
+    - {fileID: 11400000, guid: 64d18f463ab236e44b677bb5ca09404b, type: 2}
+    - {fileID: 11400000, guid: 1ae40a6432952284ca40fee094865c94, type: 2}
+    - {fileID: 11400000, guid: 5b6a863cb5e4ac3409e4c4b9d2cc226d, type: 2}
+  interfaceTargetBlock:
+    values: []

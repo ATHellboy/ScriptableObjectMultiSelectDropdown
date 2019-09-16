@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5749572176560424828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5749572176560424830}
+  - component: {fileID: 5749572176560424829}
+  m_Layer: 0
+  m_Name: BlockManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5749572176560424830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749572176560424828}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5749572176560424829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5749572176560424828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad5e36d07f2c1074f8b3ca06e7b9bd3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _debug: 0
+  _blockManagerSettings: {fileID: 11400000, guid: d15dbe612f0db894c81bca7bf9fb063b,
+    type: 2}
+  targetBlocks:
+    values:
+    - {fileID: 11400000, guid: 06ef197a50150d74bbd59e14971d0d64, type: 2}
+    - {fileID: 11400000, guid: 7813bad2eca620e4b8ba9ef02c6a51c1, type: 2}
+    - {fileID: 11400000, guid: e722f56469abf8040abe00b5c7b415a2, type: 2}
+  targetBlocksByGrouping:
+    values:
+    - {fileID: 11400000, guid: 06ef197a50150d74bbd59e14971d0d64, type: 2}
+  derivedClassTargetBlock:
+    values:
+    - {fileID: 11400000, guid: 845bb09fb7a27914aab1ed8e41fa0bc4, type: 2}
+    - {fileID: 11400000, guid: 0c04c34a666b5ef45b4de17d56b37f7f, type: 2}
+  derivedAbstractClassTargetBlock:
+    values:
+    - {fileID: 11400000, guid: 206a0e01685e06645970a96112a1eb9e, type: 2}
+    - {fileID: 11400000, guid: 1ae40a6432952284ca40fee094865c94, type: 2}
+  interfaceTargetBlock:
+    values:
+    - {fileID: 11400000, guid: 1a2d527461d5fcc45b670b13a4c6edf1, type: 2}
+    - {fileID: 11400000, guid: cb9a5c190c16c074bb08579d9b9c1084, type: 2}
+    - {fileID: 11400000, guid: f08e908af041baa49b12fc391937dc75, type: 2}
+    - {fileID: 11400000, guid: 497631a3e68e18343a6ceb125aed4f7a, type: 2}
+    - {fileID: 11400000, guid: 0062a4372fa0c3d4fa8ceb75c36518d5, type: 2}
+    - {fileID: 11400000, guid: 40ec20c9b0451bf4899aeb7d3192c53c, type: 2}
